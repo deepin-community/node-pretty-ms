@@ -1,0 +1,159 @@
+Description: replace ava by tape
+Author: Xavier Guimard <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2020-12-10
+
+--- a/test.js
++++ b/test.js
+@@ -1,5 +1,5 @@
+-import test from 'ava';
+-import prettyMilliseconds from '.';
++const test = require('tape');
++const prettyMilliseconds = require('.');
+ 
+ test('prettify milliseconds', t => {
+ 	t.is(prettyMilliseconds(0), '0ms');
+@@ -20,6 +20,7 @@
+ 	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465), '1y 154d 6h');
+ 	t.is(prettyMilliseconds(119999), '1m 59.9s');
+ 	t.is(prettyMilliseconds(120000), '2m');
++	t.end();
+ });
+ 
+ test('have a compact option', t => {
+@@ -27,6 +28,7 @@
+ 	t.is(prettyMilliseconds(1000 * 60 * 60 * 999, {compact: true}), '41d');
+ 	t.is(prettyMilliseconds(1000 * 60 * 60 * 24 * 465, {compact: true}), '1y');
+ 	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465, {compact: true}), '1y');
++	t.end();
+ });
+ 
+ test('have a unitCount option', t => {
+@@ -37,6 +39,7 @@
+ 	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465, {unitCount: 1}), '1y');
+ 	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465, {unitCount: 2}), '1y 154d');
+ 	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465, {unitCount: 3}), '1y 154d 6h');
++	t.end();
+ });
+ 
+ test('have a secondsDecimalDigits option', t => {
+@@ -48,17 +51,20 @@
+ 	t.is(prettyMilliseconds(2000, {secondsDecimalDigits: 0}), '2s');
+ 	t.is(prettyMilliseconds(33333, {secondsDecimalDigits: 0}), '33s');
+ 	t.is(prettyMilliseconds(33333, {secondsDecimalDigits: 4}), '33.3330s');
++	t.end();
+ });
+ 
+ test('have a millisecondsDecimalDigits option', t => {
+ 	t.is(prettyMilliseconds(33.333), '33ms');
+ 	t.is(prettyMilliseconds(33.333, {millisecondsDecimalDigits: 0}), '33ms');
+ 	t.is(prettyMilliseconds(33.333, {millisecondsDecimalDigits: 4}), '33.3330ms');
++	t.end();
+ });
+ 
+ test('have a keepDecimalsOnWholeSeconds option', t => {
+ 	t.is(prettyMilliseconds(1000 * 33, {secondsDecimalDigits: 2, keepDecimalsOnWholeSeconds: true}), '33.00s');
+ 	t.is(prettyMilliseconds(1000 * 33.00004, {secondsDecimalDigits: 2, keepDecimalsOnWholeSeconds: true}), '33.00s');
++	t.end();
+ });
+ 
+ test('have a verbose option', t => {
+@@ -80,11 +86,13 @@
+ 	t.is(fn(1000 * 60 * 60 * 999), '41 days 15 hours');
+ 	t.is(fn(1000 * 60 * 60 * 24 * 465), '1 year 100 days');
+ 	t.is(fn(1000 * 60 * 67 * 24 * 465), '1 year 154 days 6 hours');
++	t.end();
+ });
+ 
+ test('have a separateMilliseconds option', t => {
+ 	t.is(prettyMilliseconds(1100, {separateMilliseconds: false}), '1.1s');
+ 	t.is(prettyMilliseconds(1100, {separateMilliseconds: true}), '1s 100ms');
++	t.end();
+ });
+ 
+ test('have a formatSubMilliseconds option', t => {
+@@ -97,6 +105,7 @@
+ 		}),
+ 		'1h 23s 433ms 123µs 456ns'
+ 	);
++	t.end();
+ });
+ 
+ test('work with verbose and compact options', t => {
+@@ -118,6 +127,7 @@
+ 	t.is(fn(1000 * 60 * 60 * 999), '41 days');
+ 	t.is(fn(1000 * 60 * 60 * 24 * 465), '1 year');
+ 	t.is(fn(1000 * 60 * 67 * 24 * 750), '2 years');
++	t.end();
+ });
+ 
+ test('work with verbose and unitCount options', t => {
+@@ -127,6 +137,7 @@
+ 	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465, {verbose: true, unitCount: 1}), '1 year');
+ 	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465, {verbose: true, unitCount: 2}), '1 year 154 days');
+ 	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465, {verbose: true, unitCount: 3}), '1 year 154 days 6 hours');
++	t.end();
+ });
+ 
+ test('work with verbose and secondsDecimalDigits options', t => {
+@@ -140,6 +151,7 @@
+ 	t.is(fn((1000 * 2) + 400), '2.4000 seconds');
+ 	t.is(fn((1000 * 5) + 254), '5.2540 seconds');
+ 	t.is(fn(33333), '33.3330 seconds');
++	t.end();
+ });
+ 
+ test('work with verbose and millisecondsDecimalDigits options', t => {
+@@ -153,6 +165,7 @@
+ 	t.is(fn((1 * 2) + 0.4), '2.4000 milliseconds');
+ 	t.is(fn((1 * 5) + 0.254), '5.2540 milliseconds');
+ 	t.is(fn(33.333), '33.3330 milliseconds');
++	t.end();
+ });
+ 
+ test('work with verbose and formatSubMilliseconds options', t => {
+@@ -178,12 +191,14 @@
+ 		prettyMilliseconds(0.001, {formatSubMilliseconds: true, verbose: true}),
+ 		'1 microsecond'
+ 	);
++	t.end();
+ });
+ 
+ test('compact option overrides unitCount option', t => {
+ 	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465, {verbose: true, compact: true, unitCount: 1}), '1 year');
+ 	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465, {verbose: true, compact: true, unitCount: 2}), '1 year');
+ 	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465, {verbose: true, compact: true, unitCount: 3}), '1 year');
++	t.end();
+ });
+ 
+ test('work with separateMilliseconds and formatSubMilliseconds options', t => {
+@@ -201,6 +216,7 @@
+ 		}),
+ 		'1m 34ms 5ns'
+ 	);
++	t.end();
+ });
+ 
+ test('throw on invalid', t => {
+@@ -215,6 +231,7 @@
+ 	t.throws(() => {
+ 		prettyMilliseconds(Infinity);
+ 	});
++	t.end();
+ });
+ 
+ test('properly rounds milliseconds with secondsDecimalDigits', t => {
+@@ -233,6 +250,7 @@
+ 	t.is(fn((3600 * 1e3) - 1), '59 minutes 59 seconds');
+ 	t.is(fn(2 * 3600 * 1e3), '2 hours');
+ 	t.is(fn((2 * 3600 * 1e3) - 1), '1 hour 59 minutes 59 seconds');
++	t.end();
+ });
+ 
+ test('`colonNotation` option', t => {
+@@ -296,4 +314,5 @@
+ 	t.is(prettyMilliseconds((1000 * 60 * 59) + (1000 * 59) + 543, {colonNotation: true, separateMilliseconds: true}), '59:59.5');
+ 	t.is(prettyMilliseconds((1000 * 60 * 59) + (1000 * 59) + 543, {colonNotation: true, verbose: true}), '59:59.5');
+ 	t.is(prettyMilliseconds((1000 * 60 * 59) + (1000 * 59) + 543, {colonNotation: true, compact: true}), '59:59.5');
++	t.end();
+ });

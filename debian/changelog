@@ -1,0 +1,53 @@
+node-pretty-ms (7.0.1-2) unstable; urgency=medium
+
+  * Team upload
+  * Update standards version to 4.6.0, no changes needed
+  * Fix GitHub tags regex
+  * Fix filenamemangle
+  * Drop dependency to nodejs
+
+ -- Yadd <yadd@debian.org>  Sat, 13 Nov 2021 21:21:22 +0100
+
+node-pretty-ms (7.0.1-1) unstable; urgency=medium
+
+  * Team upload
+  * Bump debhelper compatibility level to 13
+  * Declare compliance with policy 4.5.1
+  * Modernize debian/watch
+  * Use dh-sequence-nodejs
+  * New upstream version 7.0.1
+  * Refresh patch
+
+ -- Xavier Guimard <yadd@debian.org>  Thu, 10 Dec 2020 10:47:56 +0100
+
+node-pretty-ms (6.0.1-1) unstable; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.5.0
+  * Bump debhelper compatibility level to 12
+  * Use pkg-js-tools auto install
+  * New upstream version 6.0.1
+  * Add "Rules-Requires-Root: no"
+  * Add debian/gbp.conf
+  * Add upstream/metadata
+  * Require node-parse-ms ≥ 2.1.0
+  * Enable upstream test using tape instead of ava
+  * Update copyright
+
+ -- Xavier Guimard <yadd@debian.org>  Sat, 14 Mar 2020 10:31:25 +0100
+
+node-pretty-ms (3.2.0-1) unstable; urgency=medium
+
+  * New upstream version 3.2.0
+  * Bump Standards-Version to 4.1.4 (no changes needed)
+  * Bump debhelper compatibility level to 11
+  * Use salsa.debian.org in Vcs-* fields
+  * Remove dependency on node-plur (removed upstream)
+
+ -- Pirate Praveen <praveen@debian.org>  Mon, 11 Jun 2018 12:05:58 +0530
+
+node-pretty-ms (3.0.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #875266)
+
+ -- Pirate Praveen <praveen@debian.org>  Sun, 10 Sep 2017 11:35:04 +0530
