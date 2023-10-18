@@ -5,9 +5,11 @@ Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.deb
 Uploaders: Pirate Praveen <praveen@debian.org>
 Build-Depends: debhelper-compat (= 13)
  , dh-sequence-nodejs
- , node-parse-ms (>= 2.1.0) <!nocheck>
+ , node-parse-ms (>= 3.0.0) <!nocheck>
+ , node-rollup-plugin-node-resolve
  , node-tape <!nocheck>
-Standards-Version: 4.6.0
+ , rollup
+Standards-Version: 4.6.1
 Vcs-Browser: https://salsa.debian.org/js-team/node-pretty-ms
 Vcs-Git: https://salsa.debian.org/js-team/node-pretty-ms.git
 Homepage: https://github.com/sindresorhus/pretty-ms
@@ -17,7 +19,7 @@ Rules-Requires-Root: no
 Package: node-pretty-ms
 Architecture: all
 Depends: ${misc:Depends}
- , node-parse-ms (>= 2.1.0)
+ , node-parse-ms (>= 3.0.0)
 Description: Convert milliseconds to a human readable string
  This module can convert 1337000000 → 15d 11h 23m 20s.
  .
