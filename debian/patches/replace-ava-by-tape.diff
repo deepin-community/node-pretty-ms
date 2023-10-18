@@ -1,22 +1,20 @@
 Description: replace ava by tape
-Author: Xavier Guimard <yadd@debian.org>
+Author: Yadd <yadd@debian.org>
 Forwarded: not-needed
-Last-Update: 2020-12-10
+Last-Update: 2022-09-20
 
 --- a/test.js
 +++ b/test.js
-@@ -1,5 +1,5 @@
+@@ -1,4 +1,4 @@
 -import test from 'ava';
--import prettyMilliseconds from '.';
-+const test = require('tape');
-+const prettyMilliseconds = require('.');
++import test from 'tape';
+ import prettyMilliseconds from './index.js';
  
  test('prettify milliseconds', t => {
- 	t.is(prettyMilliseconds(0), '0ms');
 @@ -20,6 +20,7 @@
  	t.is(prettyMilliseconds(1000 * 60 * 67 * 24 * 465), '1y 154d 6h');
- 	t.is(prettyMilliseconds(119999), '1m 59.9s');
- 	t.is(prettyMilliseconds(120000), '2m');
+ 	t.is(prettyMilliseconds(119_999), '1m 59.9s');
+ 	t.is(prettyMilliseconds(120_000), '2m');
 +	t.end();
  });
  
@@ -39,8 +37,8 @@ Last-Update: 2020-12-10
  test('have a secondsDecimalDigits option', t => {
 @@ -48,17 +51,20 @@
  	t.is(prettyMilliseconds(2000, {secondsDecimalDigits: 0}), '2s');
- 	t.is(prettyMilliseconds(33333, {secondsDecimalDigits: 0}), '33s');
- 	t.is(prettyMilliseconds(33333, {secondsDecimalDigits: 4}), '33.3330s');
+ 	t.is(prettyMilliseconds(33_333, {secondsDecimalDigits: 0}), '33s');
+ 	t.is(prettyMilliseconds(33_333, {secondsDecimalDigits: 4}), '33.3330s');
 +	t.end();
  });
  
@@ -53,7 +51,7 @@ Last-Update: 2020-12-10
  
  test('have a keepDecimalsOnWholeSeconds option', t => {
  	t.is(prettyMilliseconds(1000 * 33, {secondsDecimalDigits: 2, keepDecimalsOnWholeSeconds: true}), '33.00s');
- 	t.is(prettyMilliseconds(1000 * 33.00004, {secondsDecimalDigits: 2, keepDecimalsOnWholeSeconds: true}), '33.00s');
+ 	t.is(prettyMilliseconds(1000 * 33.000_04, {secondsDecimalDigits: 2, keepDecimalsOnWholeSeconds: true}), '33.00s');
 +	t.end();
  });
  
@@ -74,7 +72,7 @@ Last-Update: 2020-12-10
  test('have a formatSubMilliseconds option', t => {
 @@ -97,6 +105,7 @@
  		}),
- 		'1h 23s 433ms 123µs 456ns'
+ 		'1h 23s 433ms 123µs 456ns',
  	);
 +	t.end();
  });
@@ -99,7 +97,7 @@ Last-Update: 2020-12-10
 @@ -140,6 +151,7 @@
  	t.is(fn((1000 * 2) + 400), '2.4000 seconds');
  	t.is(fn((1000 * 5) + 254), '5.2540 seconds');
- 	t.is(fn(33333), '33.3330 seconds');
+ 	t.is(fn(33_333), '33.3330 seconds');
 +	t.end();
  });
  
@@ -114,7 +112,7 @@ Last-Update: 2020-12-10
  test('work with verbose and formatSubMilliseconds options', t => {
 @@ -178,12 +191,14 @@
  		prettyMilliseconds(0.001, {formatSubMilliseconds: true, verbose: true}),
- 		'1 microsecond'
+ 		'1 microsecond',
  	);
 +	t.end();
  });
@@ -129,7 +127,7 @@ Last-Update: 2020-12-10
  test('work with separateMilliseconds and formatSubMilliseconds options', t => {
 @@ -201,6 +216,7 @@
  		}),
- 		'1m 34ms 5ns'
+ 		'1m 34ms 5ns',
  	);
 +	t.end();
  });
@@ -137,7 +135,7 @@ Last-Update: 2020-12-10
  test('throw on invalid', t => {
 @@ -215,6 +231,7 @@
  	t.throws(() => {
- 		prettyMilliseconds(Infinity);
+ 		prettyMilliseconds(Number.POSITIVE_INFINITY);
  	});
 +	t.end();
  });

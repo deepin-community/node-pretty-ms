@@ -1,3 +1,21 @@
+node-pretty-ms (8.0.0-2) unstable; urgency=medium
+
+  * Team upload
+  * Back to unstable
+
+ -- Yadd <yadd@debian.org>  Thu, 06 Oct 2022 06:26:19 +0200
+
+node-pretty-ms (8.0.0-1) experimental; urgency=medium
+
+  * Team upload
+  * Update standards version to 4.6.1, no changes needed.
+  * New upstream version 8.0.0
+  * Build commonjs files using mjs2cjs
+  * Require node-parse-ms >= 3
+  * Update test
+
+ -- Yadd <yadd@debian.org>  Tue, 20 Sep 2022 17:12:52 +0200
+
 node-pretty-ms (7.0.1-2) unstable; urgency=medium
 
   * Team upload
